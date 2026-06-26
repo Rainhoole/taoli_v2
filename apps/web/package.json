@@ -1,0 +1,22 @@
+{
+  "name": "@arb/web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "next build"
+  },
+  "dependencies": {
+    "@arb/shared": "*",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  }
+}
