@@ -12,14 +12,41 @@
 - [x] Basic API server (/health)
 - [x] Next.js dashboard skeleton
 - [x] Tests (10/10 passing)
+- [x] Loop system infra (.hermes.md, STATE.md, SKILL.md)
 
-### Phase 1: Market Data
+### V2 Research ✅ (2026-06-27)
+- [x] Polymarket arbitrage (NegRisk + binary + combinatorial)
+- [x] PM↔CEX cross-venue (latency arb, perp arb, options arb)
+- [x] CEX↔DEX Hyperliquid (funding rate, leg risk)
+- [x] Tools & libraries scan (2026 ecosystem)
+- [x] V2_PLAN.md synthesized from 7 research sources
+
+### V2 Phase 1A: Hyperliquid Integration
+- [ ] HyperliquidAdapter implementation
+- [ ] EIP-712 signing + API Wallet setup
+- [ ] 1h vs 8h funding rate cycle handling
+- [ ] Leg risk management (timeout + rollback)
+- [ ] Dry-run 14 days
+
+### V2 Phase 1B: Polymarket Adapter
+- [ ] PolymarketAdapter (CLOB + Gamma + WebSocket)
+- [ ] NegRisk scanner (priority!)
+- [ ] Binary YES+NO scanner
+- [ ] FOK order execution + gas management
+- [ ] Dry-run 14 days
+
+### V2 Phase 2: PM↔CEX Latency Arb
+- [ ] Dual Binance WS + PM CLOB WS stream
+- [ ] Chainlink oracle window-open price tracking
+- [ ] Momentum detector + probability model
+- [ ] FAK execution + 250ms taker delay handling
+- [ ] Paper → Shadow → Small Live
+
+### Phase 1: Market Data (CEX only)
 - [ ] BinanceAdapter implementation
 - [ ] BitgetAdapter implementation
-- [ ] HyperliquidAdapter implementation
 - [ ] WebSocket connection + order book maintenance
 - [ ] REST snapshot fallback on reconnect
-- [ ] Freshness tracking integrated with MarketDataService
 
 ### Phase 2: Persistence
 - [x] AuditRepository interface
