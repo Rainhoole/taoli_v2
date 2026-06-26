@@ -1,6 +1,6 @@
-﻿# 05 - Add Postgres Persistence And Audit Log
+# 05 - Add Postgres Persistence And Audit Log
 
-Status: ready-for-agent
+Status: Done
 
 ## Goal
 
@@ -25,3 +25,4 @@ Persist opportunities, orders, fills, positions, risk events, rescue actions, an
 - 04-build-opportunity-engine.md
 
 ## Comments
+
