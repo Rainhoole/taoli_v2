@@ -227,6 +227,7 @@ Week 3-4:
 - Portnaya (2026): "Do Prediction Markets Match Option Prices?" — PM vs CEX 期权 5.6pp 概率差
 - IMDEA Networks: Polymarket 套利实证 — $40M 利润提取
 - Kroer et al. (2016): 无套利组合市场做市 — Frank-Wolfe + Bregman 投影
+- arXiv 2502.06028: Perpetual Demand Lending Pools — GLP/JLP 权重套利模型
 
 ### 开源 Bot
 - `learningworship/polymarket-latency-bot` — Python PM↔Binance 延迟套利（测试/实盘双模式）
@@ -236,10 +237,45 @@ Week 3-4:
 - `ai-trading-terminal/cloddsbot` — 多场所 AI Agent（PM+Kalshi+Binance+HL+Solana）
 - `Hummingbot` — 最成熟框架，原生 Hyperliquid connector
 
+### 关键 TypeScript SDK（2026年最新）
+- `@nktkas/hyperliquid` v0.33.0 — 最成熟 HL TS SDK，零依赖，WebSocket 订阅
+- `tiagosiebler/binance` v3.5.10 — Binance REST+WS，自动重连
+- `tiagosiebler/bitget-api` v3.1.9 — Bitget V3/UTA 全支持
+- `tiagosiebler/orderbooks` — 订单簿增量处理，0 外部依赖
+- `ccxt` v4.5.59 — Pro WebSocket 已免费，`watchOrderBookForSymbols`
+
 ### API 文档
 - Polymarket CLOB API: docs.polymarket.com
 - Hyperliquid API: hyperliquid.gitbook.io
 - Binance WS: binance-docs.github.io
+
+---
+
+## 九、基础设施决策 ⚡ 重大发现
+
+**Glassnode 2026年3月研究**：Hyperliquid 的 24 个验证节点**全部集中在 AWS ap-northeast-1（东京）**。
+Binance 也将主要基础设施运行在同一区域。
+
+| 位置 | HL 延迟 | Binance 延迟 | 劣势 |
+|------|---------|-------------|------|
+| **东京** | 2-5ms | ~5ms | — |
+| 新加坡 | ~70ms | ~30ms | 65ms 差距 |
+| 欧洲 | 200ms+ | ~50ms | 150ms 差距 |
+| 美东 | ~180ms | ~80ms | 100ms 差距 |
+
+**结论**：部署到 AWS EC2 Tokyo (ap-northeast-1)，t3.medium 起步 ($23/月)，2-5ms 到所有目标交易所。
+
+### 推荐技术栈（最终版）
+
+| 组件 | 推荐 | 理由 |
+|------|------|------|
+| Binance | `tiagosiebler/binance` | TS 原生，WS 自动重连 |
+| Bitget | `tiagosiebler/bitget-api` | V3/UTA + WS 下单 |
+| Hyperliquid | `@nktkas/hyperliquid` | 0 依赖，EIP-712 签名 |
+| 订单簿 | `tiagosiebler/orderbooks` | 0 依赖，增量处理 |
+| WS 管理 | `websocket-ts` | 2KB，自动重连+缓冲 |
+| 统一 API | `ccxt` v4.5.59 | Pro WS 已免费 |
+| 部署 | AWS EC2 Tokyo | 2-5ms 全交易所 |
 
 ---
 
